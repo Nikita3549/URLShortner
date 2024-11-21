@@ -1,0 +1,57 @@
+{
+  "openapi": "3.0.0",
+  "servers": [{
+    "url": "http://localhost:3000",
+    "description": "Dev server"
+  }
+  ],
+  "info": {
+    "title": "URLShorter",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/shortenUrl/create":{
+      "post": {
+          "summary": "Create shortenUrl",
+          "description": "User sends full url and wished shorten name of this url. In response, user receive shorten url",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "fullUrl": {
+                      "type": "string"
+                    },
+                    "shortenUrl": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Full and wished url",
+            "required": true
+          },
+          "responses": {
+              "200": {
+                "description": "Shorten url was created",
+                "content": {
+                  "text/plain": {
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Invalid Request"
+              },
+              "409": {
+                "description": "This name is already reserved"
+              }
+          }
+      }
+    }
+  }
+}

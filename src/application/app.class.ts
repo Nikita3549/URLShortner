@@ -3,6 +3,7 @@ import {Config} from "../config/config.class";
 import express, {Express} from "express"
 import cors from "cors"
 import router from "../router";
+import {APIErrorMiddleware} from "../middlewares/api-error.function";
 
 export class App implements IApp{
     readonly PORT: number
@@ -29,5 +30,6 @@ export class App implements IApp{
         this.app.use(express.urlencoded({ extended: false }))
         this.app.use(express.json())
         this.app.use('/api', router)
+        this.app.use(APIErrorMiddleware)
     }
 }
