@@ -45,12 +45,125 @@
                 }
               },
               "400": {
-                "description": "Invalid Request"
+                "description": "Invalid Request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/errorObject"
+                    }
+                  }
+                }
               },
               "409": {
-                "description": "This name is already reserved"
+                "description": "This name is already reserved",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/errorObject"
+                    }
+                  }
+                }
               }
           }
+      }
+    },
+    "/api/shortenUrl/get/:fullUrl": {
+      "get": {
+        "summary": "Get shorten url by full",
+        "description": "User sends request with full url and receive shorten url that ALREADY exists",
+        "parameters": [{
+          "name": "fullUrl",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Shorten url doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shortenUrl/redirect/:shortenUrl": {
+      "get": {
+        "summary": "Redirect to the full url",
+        "description": "Users sends request with shorten url in the path and then is permanent redirected to the full url",
+        "parameters": [{
+          "name": "shortenUrl",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "308": {
+            "description": "Successful request. User will be redirected"
+          },
+          "400": {
+            "description": "Bad Request. Shorten url doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "errorObject": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "errors": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "null"
+                }
+              }]
+          }
+        }
       }
     }
   }

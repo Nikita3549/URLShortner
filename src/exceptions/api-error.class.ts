@@ -9,7 +9,7 @@ export class ApiError extends Error implements IApiError{
         this.errors = errors
     }
     static BadRequest(message?: string, errors: TErrors = []): ApiError{
-        return new ApiError(401, message, errors)
+        return new ApiError(400, message, errors)
     }
     static Conflict(message?: string, errors: TErrors = []): ApiError{
         return new ApiError(409, message, errors)
