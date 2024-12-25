@@ -12,6 +12,9 @@
   "paths": {
     "/api/shortenUrl/create":{
       "post": {
+          "tags": [
+            "shortenUrl"
+          ],
           "summary": "Create shortenUrl",
           "description": "User sends full url and wished shorten name of this url. In response, user receive shorten url",
           "requestBody": {
@@ -67,8 +70,12 @@
           }
       }
     },
+
     "/api/shortenUrl/get/:fullUrl": {
       "get": {
+        "tags": [
+          "shortenUrl"
+        ],
         "summary": "Get shorten url by full",
         "description": "User sends request with full url and receive shorten url that ALREADY exists",
         "parameters": [{
@@ -105,6 +112,9 @@
     },
     "/api/shortenUrl/redirect/:shortenUrl": {
       "get": {
+        "tags": [
+          "shortenUrl"
+        ],
         "summary": "Redirect to the full url",
         "description": "Users sends request with shorten url in the path and then is permanent redirected to the full url",
         "parameters": [{

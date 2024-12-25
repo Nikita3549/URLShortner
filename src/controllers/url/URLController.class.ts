@@ -26,7 +26,7 @@ export class URLController implements IURLController{
         try{
             const fullUrl = await new URLService().findFullURLByShorten(req.params.shortenUrl)
 
-            res.redirect(fullUrl, 308)
+            res.redirect(fullUrl)
         } catch (e: unknown){
             console.log(e)
             next(e)

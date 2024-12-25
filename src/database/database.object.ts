@@ -13,7 +13,6 @@ class Database implements IDatabase{
             user: this.config.get('DATABASE_USER'),
             password: this.config.get('DATABASE_PASSWORD'),
             host: this.config.get('DATABASE_HOST'),
-            port: +this.config.get('DATABASE_PORT'),
             database: this.config.get('DATABASE_DBNAME')
         })
     }
@@ -26,3 +25,4 @@ class Database implements IDatabase{
 }
 
 export const database = new Database()
+

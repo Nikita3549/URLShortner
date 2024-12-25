@@ -17,7 +17,7 @@ export class App implements IApp{
     }
     public async start() {
         try{
-            this.app.listen(this.PORT,() => {
+            this.app.listen(this.PORT, "0.0.0.0",() => {
                 console.log(`Server started on PORT ${this.PORT}`)
             })
         } catch (e: unknown){
